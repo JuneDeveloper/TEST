@@ -2,12 +2,14 @@ package com.example.test
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.FragmentTransaction
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),OnFragmentDataListener {
 
     private lateinit var toolbarTB:Toolbar
 
@@ -35,6 +37,21 @@ class MainActivity : AppCompatActivity() {
             R.id.exitItem -> finish()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onData(data: String?) {
+        val bundle = Bundle()
+        bundle.putString("oldNote",data)
+        Log.d("TAGGGGGGGGGG","$data")
+
+        val transaction = this.supportFragmentManager.beginTransaction()
+        val second = SecondFragment()
+        second.arguments = bundle
+
+        transaction.replace(R.id.first_fragment,SecondFragment())
+        transaction.addToBackStack(null)
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+        transaction.commit()
     }
 }
 

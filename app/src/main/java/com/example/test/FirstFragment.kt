@@ -22,6 +22,7 @@ import java.util.Date
 
 class FirstFragment : Fragment() {
 
+    private lateinit var onFragmentDataListener:OnFragmentDataListener
     private val listNotes:MutableList<Notes> = mutableListOf()
     private var count = 0
 
@@ -35,6 +36,8 @@ class FirstFragment : Fragment() {
     @SuppressLint("NewApi", "NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        onFragmentDataListener = requireActivity() as OnFragmentDataListener
 
         val editText:EditText = view.findViewById(R.id.firstEditTextET)
         val saveBTN:Button = view.findViewById(R.id.firstSaveBTN)
@@ -62,18 +65,7 @@ class FirstFragment : Fragment() {
         adapter.setOnNotesClickListener(
             object : RecycleAdapter.SetOnClickListener {
                 override fun onNotesClick(note: String, position: Int) {
-                    val bundle = Bundle()
-                    bundle.putString("oldNote",note)
-                    Log.d("TEG","$note")
-
-                    val transaction = fragmentManager?.beginTransaction()
-                    val second = SecondFragment()
-                    second.arguments = bundle
-
-                    transaction?.replace(R.id.first_fragment,SecondFragment())
-                    transaction?.addToBackStack(null)
-                    transaction?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                    transaction?.commit()
+                    onFragmentDataListener.onData(note)
                 }
             }
         )
