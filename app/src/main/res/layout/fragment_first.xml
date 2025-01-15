@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp"
+    android:id="@+id/first"
+    tools:context=".FirstFragment">
+
+    <EditText
+        android:id="@+id/firstEditTextET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Введите заметку"
+        android:padding="15dp"/>
+
+    <Button
+        android:id="@+id/firstSaveBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Сохранить"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/firstRecycleView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        tools:listitem="@layout/razmetka_yacheiki"/>
+
+</LinearLayout>
